@@ -42,7 +42,15 @@ application/json
 }
 ```
 
-GET  
-localhost:8080/questionnaire/{id}  
+GET   
+localhost:8080/questionnaire/{id}   
 
+# TODOs  
 
+-Add Docker YAML  
+-Add Swagger documentation  
+-Add Error Handling  
+-Add Mockito Unit Tests  
+-Add PUT/DELETE endpoints  
+-Add ListAll method  
+-Add SonarQube  
