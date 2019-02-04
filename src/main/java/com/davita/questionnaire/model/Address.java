@@ -1,5 +1,6 @@
 package com.davita.questionnaire.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 import org.apache.catalina.User;
@@ -18,7 +19,8 @@ public class Address {
     private String city;
     private String state;
     private String zip;
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "person_id")
+
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "address")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Person person;
 }

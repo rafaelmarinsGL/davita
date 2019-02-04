@@ -1,5 +1,6 @@
 package com.davita.questionnaire.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,7 +20,7 @@ public class Questionnaire {
     private String content;
     private LocalDateTime submitDate;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "questionnaire")
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Person person;
 
     public Questionnaire() {

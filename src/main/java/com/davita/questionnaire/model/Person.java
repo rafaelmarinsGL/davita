@@ -1,5 +1,6 @@
 package com.davita.questionnaire.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -21,10 +22,11 @@ public class Person {
     private String birthDate;
     private String birthPlace;
     private String birthCountry;
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "person")
+
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Address address;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "questionnaire_id")
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "person")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Questionnaire questionnaire;
 }
