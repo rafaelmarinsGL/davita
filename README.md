@@ -2,13 +2,13 @@
 
 Physician Experience
 
-Install Gradle (MACOS)
+Install Gradle (MACOS):
 brew install gradle
 
-Download Postman
+Download Postman:
 https://www.getpostman.com/downloads/
 
-H2 Database
+H2 Database:
 http://localhost:8080/h2
 user:sa
 pass:
