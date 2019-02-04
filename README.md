@@ -13,7 +13,7 @@ http://localhost:8080/h2
 user:sa  
 pass:  
 
-Examples:  
+# Examples:  
 
 POST  
 localhost:8080/questionnaire  
@@ -39,3 +39,8 @@ application/json
         }
     }
 }
+
+GET  
+localhost:8080/questionnaire/{id}  
+
+
