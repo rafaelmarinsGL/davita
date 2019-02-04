@@ -19,9 +19,10 @@ POST
 localhost:8080/questionnaire  
 application/json  
 
+```json
 {
     "content": "New Content",
-    "submitDate": null,
+    "submitDate": "2018-02-04T00:00:00",
     "person": {
         "firstName": "Rafael",
         "middleName": "Marins",
@@ -39,6 +40,7 @@ application/json
         }
     }
 }
+```
 
 GET  
 localhost:8080/questionnaire/{id}  
