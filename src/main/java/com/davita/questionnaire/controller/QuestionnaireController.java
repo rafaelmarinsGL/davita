@@ -1,13 +1,10 @@
 package com.davita.questionnaire.controller;
 
-import com.davita.questionnaire.model.Person;
 import com.davita.questionnaire.model.Questionnaire;
-import com.davita.questionnaire.model.Test;
 import com.davita.questionnaire.service.QuestionnaireService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
 import java.util.Optional;
 
 @RestController
@@ -28,9 +25,4 @@ public class QuestionnaireController {
         return questionnaireService.save(questionnaire);
     }
 
-    @PostMapping("test")
-    Test post(@RequestBody Test test){
-        System.out.println(test);
-        return test;
-    }
 }
