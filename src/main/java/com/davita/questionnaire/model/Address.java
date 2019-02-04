@@ -20,7 +20,7 @@ public class Address {
     private String state;
     private String zip;
 
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "address")
+    @OneToOne(fetch = FetchType.EAGER, mappedBy = "address")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Person person;
 }

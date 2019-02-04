@@ -23,10 +23,10 @@ public class Person {
     private String birthPlace;
     private String birthCountry;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Address address;
 
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "person")
+    @OneToOne(fetch = FetchType.EAGER, mappedBy = "person")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Questionnaire questionnaire;
 }
