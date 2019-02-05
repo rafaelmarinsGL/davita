@@ -1,6 +1,8 @@
 package com.davita.questionnaire.controller;
 
+import com.davita.questionnaire.model.Person;
 import com.davita.questionnaire.model.Questionnaire;
+import com.davita.questionnaire.service.PersonService;
 import com.davita.questionnaire.service.QuestionnaireService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
