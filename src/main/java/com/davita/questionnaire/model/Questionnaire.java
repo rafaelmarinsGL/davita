@@ -9,8 +9,6 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@Getter
-@Setter
 @Entity
 public class Questionnaire {
 
@@ -29,6 +27,38 @@ public class Questionnaire {
     public Questionnaire(String content, LocalDateTime submitDate, Person person) {
         this.content = content;
         this.submitDate = submitDate;
+        this.person = person;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public LocalDateTime getSubmitDate() {
+        return submitDate;
+    }
+
+    public void setSubmitDate(LocalDateTime submitDate) {
+        this.submitDate = submitDate;
+    }
+
+    public Person getPerson() {
+        return person;
+    }
+
+    public void setPerson(Person person) {
         this.person = person;
     }
 }
