@@ -5,7 +5,7 @@ Physician Experience
 Install Gradle (MACOS):  
 brew install gradle
 
-Clone project 
+Clone project and:  
 run command: gradle bootRun  
 
 Download Postman:  
