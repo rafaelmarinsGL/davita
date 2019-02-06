@@ -14,7 +14,10 @@ https://www.getpostman.com/downloads/
 H2 Database:  
 http://localhost:8080/h2  
 user:sa  
-pass:  
+pass:
+
+Swagger Documentation:
+http://localhost:8080/swagger-ui.html
 
 # Examples:  
 
@@ -50,8 +53,7 @@ localhost:8080/questionnaire/{id}
 
 # TODOs  
 
--Add Docker YAML  
--Add Swagger documentation  
+-Add Docker YAML
 -Add Error Handling  
 -Add Mockito Unit Tests  
 -Add PUT/DELETE endpoints  
