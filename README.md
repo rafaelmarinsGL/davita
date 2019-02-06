@@ -54,3 +54,4 @@ localhost:8080/questionnaire/{id}
 -Add PUT/DELETE endpoints  
 -Add ListAll method  
 -Add SonarQube  
+-Add SpringBoot Actuator
