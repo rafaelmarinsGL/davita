@@ -54,9 +54,16 @@ localhost:8080/questionnaire/{id}
 # TODOs  
 
 -Add Docker YAML
--Add Error Handling  
+-Add Error Handling
+ok -Add Swagger documentation
 -Add Mockito Unit Tests  
 -Add PUT/DELETE endpoints  
 -Add ListAll method  
 -Add SonarQube  
 -Add SpringBoot Actuator
+-Add Questionnaiere status(Pending/Reviewed/Completed...)  
+-Add Questionnaiere versioning  
+-Add Searches (by person/version/date...)
+-Add authentication/permission  
+
+
