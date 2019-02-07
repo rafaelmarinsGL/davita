@@ -13,6 +13,7 @@ https://www.getpostman.com/downloads/
 
 H2 Database:  
 http://localhost:8080/h2  
+JDBC URL: jdbc:h2:~/questionnaire  
 user:sa  
 pass:
 
@@ -22,7 +23,7 @@ http://localhost:8080/swagger-ui.html
 # Examples:  
 
 POST  
-localhost:8080/questionnaire  
+localhost:8080/api/v1/questionnaire  
 application/json  
 
 ```json
@@ -49,7 +50,7 @@ application/json
 ```
 
 GET   
-localhost:8080/questionnaire/{id}   
+localhost:8080/api/v1/questionnaire/{id}   
 
 # TODOs  
 
