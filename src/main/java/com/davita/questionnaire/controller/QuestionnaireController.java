@@ -1,5 +1,6 @@
 package com.davita.questionnaire.controller;
 
+import com.davita.questionnaire.model.Person;
 import com.davita.questionnaire.model.Questionnaire;
 import com.davita.questionnaire.service.QuestionnaireService;
 import io.swagger.annotations.Api;
@@ -17,13 +18,13 @@ public class QuestionnaireController {
     QuestionnaireService questionnaireService;
 
     @GetMapping("/questionnaire")
-    @ApiOperation(value = "Get all the questionnaires")
+    @ApiOperation(value = "Get all the questionnaires", notes = "Returns a list of all the questionnaires", response = Questionnaire.class, responseContainer = "List")
     ResponseEntity<?> getQuestionnaires() {
         return ResponseEntity.ok(questionnaireService.findAll());
     }
 
     @GetMapping("/questionnaire/{id}")
-    @ApiOperation(value = "Get a questionnaire by id")
+    @ApiOperation(value = "Get a questionnaire by id", notes = "Returns the questionnaire with the given id", response = Questionnaire.class)
     ResponseEntity<?> getQuestionnaire(@PathVariable Integer id) {
         return questionnaireService.findById(id)
                 .map(ResponseEntity::ok)
@@ -31,13 +32,13 @@ public class QuestionnaireController {
     }
 
     @PostMapping("/questionnaire")
-    @ApiOperation(value = "Create a questionnaire")
+    @ApiOperation(value = "Create a questionnaire", notes = "Creates a questionnaire and returns the new questionnaire", response = Questionnaire.class)
     ResponseEntity<?> postQuestionnaire(@RequestBody Questionnaire questionnaire) {
         return ResponseEntity.ok(questionnaireService.save(questionnaire));
     }
 
     @DeleteMapping("/questionnaire/{id}")
-    @ApiOperation(value = "Delete a questionnaire by id")
+    @ApiOperation(value = "Delete a questionnaire", notes = "Deletes the questionnaire with the given id")
     ResponseEntity<?> deleteQuestionnaire(@PathVariable Integer id) {
         return questionnaireService.findById(id)
                 .map(q -> {
@@ -48,7 +49,7 @@ public class QuestionnaireController {
     }
 
     @PutMapping("/questionnaire/{id}")
-    @ApiOperation(value = "Update a questionnaire")
+    @ApiOperation(value = "Update a questionnaire", notes = "Updates the questionnaire with the given id", response = Questionnaire.class)
     ResponseEntity<?> updateQuestionnaire(@PathVariable Integer id, @RequestBody Questionnaire questionnaire) {
         return questionnaireService.findById(id)
                 .map(q -> {
