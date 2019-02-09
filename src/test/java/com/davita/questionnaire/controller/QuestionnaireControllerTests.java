@@ -43,35 +43,35 @@ public class QuestionnaireControllerTests {
     }
 
     @Test
-    public void getQuestionnaireNotFound() {
+    public void testGetQuestionnaireNotFound() {
         ResponseEntity<?> result = questionnaireController.getQuestionnaire(1);
         Mockito.verify(questionnaireServiceMock).findById(1);
         assertEquals(HttpStatus.NOT_FOUND, result.getStatusCode());
     }
 
     @Test
-    public void getQuestionnaire() {
+    public void testGetQuestionnaireOk() {
         ResponseEntity<?> result = questionnaireController.getQuestionnaire(2);
         Mockito.verify(questionnaireServiceMock).findById(2);
         assertEquals(HttpStatus.OK, result.getStatusCode());
     }
 
     @Test
-    public void postQuestionnaire() {
+    public void testPostQuestionnaireOk() {
         ResponseEntity<?> result = questionnaireController.postQuestionnaire(questionnaire);
         Mockito.verify(questionnaireServiceMock).save(questionnaire);
         assertEquals(HttpStatus.OK, result.getStatusCode());
     }
 
     @Test
-    public void deleteQuestionnaireNotFound() {
+    public void testDeleteQuestionnaireNotFound() {
         ResponseEntity<?> result = questionnaireController.deleteQuestionnaire(1);
         Mockito.verify(questionnaireServiceMock).findById(1);
         assertEquals(HttpStatus.NOT_FOUND, result.getStatusCode());
     }
 
     @Test
-    public void deleteQuestionnaire() {
+    public void testDeleteQuestionnaireOk() {
         ResponseEntity<?> result = questionnaireController.deleteQuestionnaire(2);
         Mockito.verify(questionnaireServiceMock).findById(2);
         Mockito.verify(questionnaireServiceMock).deleteById(2);
@@ -79,14 +79,14 @@ public class QuestionnaireControllerTests {
     }
 
     @Test
-    public void updateQuestionnaireNotFound() {
+    public void testUpdateQuestionnaireNotFound() {
         ResponseEntity<?> result = questionnaireController.updateQuestionnaire(1, null);
         Mockito.verify(questionnaireServiceMock).findById(1);
         assertEquals(HttpStatus.NOT_FOUND, result.getStatusCode());
     }
 
     @Test
-    public void updateQuestionnaire() {
+    public void testUpdateQuestionnaireOk() {
         ResponseEntity<?> result = questionnaireController.updateQuestionnaire(2, questionnaire);
         Mockito.verify(questionnaireServiceMock).findById(2);
         Mockito.verify(questionnaireServiceMock).save(questionnaire);
