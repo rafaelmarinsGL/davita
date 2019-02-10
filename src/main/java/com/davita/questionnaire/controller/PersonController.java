@@ -23,13 +23,13 @@ public class PersonController {
     PersonService personService;
 
     @GetMapping("/person")
-    @ApiOperation(value = "Get all the persons")
+    @ApiOperation(value = "Get all the persons", notes = "Returns a list of all persons", response = Person.class, responseContainer = "List")
     ResponseEntity<?> getPersons() {
         return ResponseEntity.ok(personService.findAll());
     }
 
     @GetMapping("/person/search")
-    @ApiOperation(value = "Returns a list of persons filtered by first name and last name")
+    @ApiOperation(value = "Get Person by First name and Last name", notes = "Returns a list of persons filtered by first name and last name", response = Person.class, responseContainer = "List")
     ResponseEntity<?> searchPerson(@RequestParam String firstName, @RequestParam String lastName) {
         List<Person> result = personService.findByFirstNameAndLastName(firstName, lastName);
         return result.isEmpty() ? ResponseEntity.of(Optional.of(result)).notFound().build() : ResponseEntity.ok(result);
