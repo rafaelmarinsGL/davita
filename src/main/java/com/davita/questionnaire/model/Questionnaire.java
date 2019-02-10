@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 @Getter
@@ -21,10 +22,12 @@ public class Questionnaire {
     @ApiModelProperty(notes = "Content of the questionnaire", dataType = "String")
     private String content;
     @ApiModelProperty(notes = "Submit datetime of the questionnaire", dataType = "DateTime")
+    @NotNull
     private LocalDateTime submitDate;
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @ApiModelProperty(notes = "The person who is submitting the questionnaire", dataType = "Person")
+    @NotNull
     private Person person;
 
     public Questionnaire() {
