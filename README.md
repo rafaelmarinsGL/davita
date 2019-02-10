@@ -64,7 +64,7 @@ localhost:8080/api/v1/questionnaire/{id}
 -Add Docker YAML 
 -Add Error Handling - ControllerAdvice (done)  
 -Add SonarQube   
--Add SpringBoot Actuator (done)
+-Add SpringBoot Actuator (done)  
 -Add Questionnaire status(Pending/Reviewed/Completed...)   
 -Add Questionnaire versioning   
 -Add Searches (by person/version/date...)  
