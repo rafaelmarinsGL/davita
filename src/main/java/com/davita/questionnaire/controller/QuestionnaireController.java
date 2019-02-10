@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.xml.bind.ValidationException;
+
 @RestController
 @Api(value = "Questionnaire Endpoint", description = "CRUD operations for questionnaires")
 @RequestMapping("/api/v1")
@@ -33,8 +35,10 @@ public class QuestionnaireController {
 
     @PostMapping("/questionnaire")
     @ApiOperation(value = "Create a questionnaire", notes = "Creates a questionnaire and returns the new questionnaire", response = Questionnaire.class)
-    ResponseEntity<?> postQuestionnaire(@RequestBody Questionnaire questionnaire) {
-        return ResponseEntity.ok(questionnaireService.save(questionnaire));
+    ResponseEntity<?> postQuestionnaire(@RequestBody Questionnaire questionnaire) throws ValidationException{
+        if(questionnaire.getPerson() !=null && questionnaire.getSubmitDate()!=null) //TODO add further validations
+            return ResponseEntity.ok(questionnaireService.save(questionnaire));
+        else throw new ValidationException("Questionnaire is not complete!");
     }
 
     @DeleteMapping("/questionnaire/{id}")
