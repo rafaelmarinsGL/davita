@@ -57,14 +57,14 @@ localhost:8080/api/v1/questionnaire/{id}
 
 # TODOs  
 
--Add Swagger Documentation (done)
--Add Mockito Unit Test (done)
--Add PUT/DELETE methods (done)
--Add ListAll methods (done)
+-Add Swagger Documentation (done)  
+-Add Mockito Unit Test (done)  
+-Add PUT/DELETE methods (done)  
+-Add ListAll methods (done)  
 -Add Docker YAML 
--Add Error Handling  
--Add SonarQube  
--Add SpringBoot Actuator  
+-Add Error Handling - ControllerAdvice (done)  
+-Add SonarQube   
+-Add SpringBoot Actuator (done)
 -Add Questionnaire status(Pending/Reviewed/Completed...)   
 -Add Questionnaire versioning   
 -Add Searches (by person/version/date...)  
