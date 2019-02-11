@@ -1,5 +1,7 @@
 package com.davita.questionnaire.controller;
 
+import com.davita.questionnaire.enums.QuestionnaireStatus;
+import com.davita.questionnaire.model.Form;
 import com.davita.questionnaire.model.Person;
 import com.davita.questionnaire.model.Questionnaire;
 import com.davita.questionnaire.service.QuestionnaireService;
@@ -34,8 +36,7 @@ public class QuestionnaireControllerTests {
 
     @Before
     public void initialize() {
-        questionnaire = new Questionnaire("Test", LocalDateTime.now(), new Person());
-        questionnaire.setId(2);
+        questionnaire = new Questionnaire(QuestionnaireStatus.PENDING, new Person(), new Form());
         when(questionnaireServiceMock.findById(1)).thenReturn(Optional.empty());
         when(questionnaireServiceMock.findById(2)).thenReturn(Optional.of(questionnaire));
         doNothing().when(questionnaireServiceMock).deleteById(2);

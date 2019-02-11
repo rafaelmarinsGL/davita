@@ -3,14 +3,19 @@ package com.davita.questionnaire.model;
 import com.davita.questionnaire.enums.QuestionnaireStatus;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(uniqueConstraints = {
         @UniqueConstraint(columnNames = {"person_id", "form_id"})
 })
@@ -27,20 +32,17 @@ public class Questionnaire {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "person_id")
+    @NotNull
     private Person person;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "form_id")
+    @NotNull
     private Form form;
 
-    public Questionnaire(Integer id, QuestionnaireStatus status, Person person, Form form) {
-        this.id = id;
+    public Questionnaire(QuestionnaireStatus status, @NotNull Person person, @NotNull Form form) {
         this.status = status;
         this.person = person;
         this.form = form;
     }
-
-    public Questionnaire() {
-    }
-
 }
