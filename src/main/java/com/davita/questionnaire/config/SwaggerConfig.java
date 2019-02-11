@@ -36,7 +36,7 @@ public class SwaggerConfig {
                 new Contact(
                         "Gorilla Dev",
                         "www.support.com",
-                        "support@gorillalogic.com"),
+                        "rafael.marins@gorillalogic.com"),
                 "Apache License Version 2.0",
                 "https://www.apache.org/licenses/LICENSE-2.0",
                 Collections.emptyList()

@@ -20,6 +20,9 @@ pass:
 Swagger Documentation:  
 http://localhost:8080/swagger-ui.html
 
+Actuator:  
+http://localhost:8080/actuator  
+
 # Examples:  
 
 POST  
@@ -54,16 +57,16 @@ localhost:8080/api/v1/questionnaire/{id}
 
 # TODOs  
 
+-Add Swagger Documentation (done)  
+-Add Mockito Unit Test (done)  
+-Add PUT/DELETE methods (done)  
+-Add ListAll methods (done)  
 -Add Docker YAML 
--Add Error Handling  
-ok -Add Swagger documentation  
--Add Mockito Unit Tests  
--Add PUT/DELETE endpoints  
--Add ListAll method  
--Add SonarQube  
--Add SpringBoot Actuator  
--Add Questionnaiere status(Pending/Reviewed/Completed...)   
--Add Questionnaiere versioning   
+-Add Error Handling - ControllerAdvice (done)  
+-Add SonarQube   
+-Add SpringBoot Actuator (done)  
+-Add Questionnaire status(Pending/Reviewed/Completed...)   
+-Add Questionnaire versioning   
 -Add Searches (by person/version/date...)  
 -Add authentication/permission  
 -Fix Update person on POST Questionnaire  
