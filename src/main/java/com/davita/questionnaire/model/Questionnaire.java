@@ -8,9 +8,9 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
+@Entity
 @Getter
 @Setter
-@Entity
 @Table(uniqueConstraints = {
         @UniqueConstraint(columnNames = {"person_id", "form_id"})
 })

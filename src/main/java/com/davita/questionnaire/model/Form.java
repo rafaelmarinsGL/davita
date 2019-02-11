@@ -3,11 +3,15 @@ package com.davita.questionnaire.model;
 import com.davita.questionnaire.util.JpaJsonConverter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 
 @Entity
+@Getter
+@Setter
 @ApiModel( value = "Form", description = "Form definition")
 public class Form {
     @Id
@@ -27,29 +31,5 @@ public class Form {
     }
 
     public Form() {
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public ArrayList<FormSection> getSections() {
-        return sections;
-    }
-
-    public void setSections(ArrayList<FormSection> sections) {
-        this.sections = sections;
     }
 }
