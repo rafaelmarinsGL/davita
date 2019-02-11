@@ -17,7 +17,7 @@ JDBC URL: jdbc:h2:~/questionnaire
 user:sa  
 pass:
 
-Swagger Documentation:
+Swagger Documentation:  
 http://localhost:8080/swagger-ui.html
 
 # Examples:  
@@ -65,6 +65,8 @@ ok -Add Swagger documentation
 -Add Questionnaiere status(Pending/Reviewed/Completed...)   
 -Add Questionnaiere versioning   
 -Add Searches (by person/version/date...)  
--Add authentication/permission   
+-Add authentication/permission  
+-Fix Update person on POST Questionnaire  
+-Fix Update find impl to Read only relation (QuestionnaireService, SubmissionService)  
 
 

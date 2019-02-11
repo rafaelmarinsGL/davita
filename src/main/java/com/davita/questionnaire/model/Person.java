@@ -1,13 +1,9 @@
 package com.davita.questionnaire.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Getter;
-import lombok.Setter;
 
 import javax.persistence.*;
-
 @Entity
 @ApiModel( value = "Person", description = "Person description")
 public class Person {
@@ -37,9 +33,21 @@ public class Person {
     @ApiModelProperty(notes = "Address", dataType = "Address")
     private Address address;
 
-    @OneToOne(fetch = FetchType.EAGER, mappedBy = "person")
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private Questionnaire questionnaire;
+    public Person(Integer id, String firstName, String middleName, String lastName, String suffix, String ssn, String birthDate, String birthPlace, String birthCountry, Address address) {
+        this.id = id;
+        this.firstName = firstName;
+        this.middleName = middleName;
+        this.lastName = lastName;
+        this.suffix = suffix;
+        this.ssn = ssn;
+        this.birthDate = birthDate;
+        this.birthPlace = birthPlace;
+        this.birthCountry = birthCountry;
+        this.address = address;
+    }
+
+    public Person() {
+    }
 
     public Integer getId() {
         return id;
@@ -121,11 +129,4 @@ public class Person {
         this.address = address;
     }
 
-    public Questionnaire getQuestionnaire() {
-        return questionnaire;
-    }
-
-    public void setQuestionnaire(Questionnaire questionnaire) {
-        this.questionnaire = questionnaire;
-    }
 }
