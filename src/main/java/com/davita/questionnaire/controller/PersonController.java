@@ -20,9 +20,6 @@ public class PersonController {
     @Autowired
     PersonService personService;
 
-    @Autowired
-    QuestionnaireService questionnaireService;
-
     @GetMapping("/person")
     @ApiOperation(value = "Get all the persons", notes = "Returns a list of all persons", response = Person.class, responseContainer = "List")
     ResponseEntity<?> getPersons() {
