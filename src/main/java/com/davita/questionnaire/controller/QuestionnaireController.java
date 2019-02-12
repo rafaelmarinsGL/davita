@@ -98,7 +98,7 @@ public class QuestionnaireController {
     @ApiOperation(value = "Get a questionnaire submissions")
     ResponseEntity<?> getQuestionnaireSubmissions(@PathVariable Integer id) {
         return questionnaireService.findById(id)
-                .map(q -> submissionService.findByQuestionnaire(q))
+                .map(Questionnaire::getSubmissions)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
