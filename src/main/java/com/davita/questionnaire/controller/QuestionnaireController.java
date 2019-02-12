@@ -87,6 +87,7 @@ public class QuestionnaireController {
                 })
                 .map(q -> {
                     submission.setQuestionnaire(q);
+                    submission.setForm(q.getForm());
                     return ResponseEntity.ok(submissionService.save(submission));
                 })
                 .orElse(ResponseEntity.notFound().build());
