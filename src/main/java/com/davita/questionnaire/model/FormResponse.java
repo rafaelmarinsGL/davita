@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
+import java.util.ArrayList;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -13,5 +13,5 @@ import java.util.List;
 @Setter
 public class FormResponse {
 
-    List<Form> forms;
+    ArrayList<Form> forms;
 }

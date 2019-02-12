@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 import javax.annotation.PostConstruct;
+import java.util.Collections;
 import java.util.List;
 
 @RestController
@@ -44,7 +45,7 @@ public class QuestionnaireController {
 
     @GetMapping("/questionnaire/{id}")
     @ApiOperation(value = "Get a questionnaire by id", notes = "Returns the questionnaire with the given id", response = Questionnaire.class)
-    ResponseEntity<?> getQuestionnaire(@PathVariable Integer id) {
+    ResponseEntity<Questionnaire> getQuestionnaire(@PathVariable Integer id) {
         return questionnaireService.findById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
@@ -52,7 +53,7 @@ public class QuestionnaireController {
 
     @PostMapping("/questionnaire")
     @ApiOperation(value = "Create a questionnaire", notes = "Creates a questionnaire and returns the new questionnaire", response = Questionnaire.class)
-    ResponseEntity<?> postQuestionnaire(@Valid @RequestBody Questionnaire questionnaire){
+    ResponseEntity<Questionnaire> postQuestionnaire(@Valid @RequestBody Questionnaire questionnaire){
         return ResponseEntity.ok(questionnaireService.save(questionnaire));
     }
 
@@ -69,7 +70,7 @@ public class QuestionnaireController {
 
     @PutMapping("/questionnaire/{id}")
     @ApiOperation(value = "Update a questionnaire", notes = "Updates the questionnaire with the given id", response = Questionnaire.class)
-    ResponseEntity<?> updateQuestionnaire(@PathVariable Integer id, @RequestBody Questionnaire questionnaire) {
+    ResponseEntity<Questionnaire> updateQuestionnaire(@PathVariable Integer id, @RequestBody Questionnaire questionnaire) {
         return questionnaireService.findById(id)
                 .map(q -> {
                     questionnaire.setId(id);
@@ -80,8 +81,8 @@ public class QuestionnaireController {
     }
 
     @PostMapping("/questionnaire/{id}/submit")
-    @ApiOperation(value = "Create a submission")
-    ResponseEntity<?> submitQuestionnaire(@PathVariable Integer id, @RequestBody Submission submission) {
+    @ApiOperation(value = "Create a submission", response = Submission.class)
+    ResponseEntity<Submission> submitQuestionnaire(@PathVariable Integer id, @RequestBody Submission submission) {
         return questionnaireService.findById(id)
                 .map(q -> {
                     q.setStatus(QuestionnaireStatus.WAITING_REVIEW);
@@ -89,14 +90,15 @@ public class QuestionnaireController {
                 })
                 .map(q -> {
                     submission.setQuestionnaire(q);
+                    submission.setForm(q.getForm());
                     return ResponseEntity.ok(submissionService.save(submission));
                 })
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @GetMapping("/questionnaire/{id}/submissions")
-    @ApiOperation(value = "Get a questionnaire submissions")
-    ResponseEntity<?> getQuestionnaireSubmissions(@PathVariable Integer id) {
+    @ApiOperation(value = "Get a questionnaire submissions", response = Submission.class, responseContainer = "List")
+    ResponseEntity<List<Submission>> getQuestionnaireSubmissions(@PathVariable Integer id) {
         return questionnaireService.findById(id)
                 .map(Questionnaire::getSubmissions)
                 .map(ResponseEntity::ok)
@@ -116,7 +118,7 @@ public class QuestionnaireController {
 
         for(Form form : forms) {
             Form newForm = formController.postForm(form).getBody();
-            postQuestionnaire(new Questionnaire(QuestionnaireStatus.PENDING, newPerson, newForm));
+            postQuestionnaire(new Questionnaire(QuestionnaireStatus.PENDING, newPerson, newForm, Collections.emptyList()));
         }
     }
 }

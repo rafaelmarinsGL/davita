@@ -44,14 +44,24 @@ public class FormStackService {
                 new ParameterizedTypeReference<FormResponse>() {
                 }).getBody().getForms();
 
-        return forms
-                .stream()
-                .peek(f -> f.setSections(
-                        Arrays.asList(
-                                new FormSection(
-                                        "Default Section",
-                                        getFormFields(f.getId())))))
-                .collect(Collectors.toList());
+        for (Form form : forms) {
+            Integer counter = 0;
+            ArrayList<FormSection> sections = new ArrayList<>();
+            FormSection section = new FormSection("Section # 1", new ArrayList<>());
+            sections.add(section);
+            List<Field> fields = getFormFields(form.getId());
+            for(Field field : fields) {
+                if (counter > 0 && counter % 3 == 0) {
+                    section = new FormSection("Section # " + ((counter / 3) + 1), new ArrayList<>());
+                    sections.add(section);
+                }
+                section.getFields().add(field);
+                counter++;
+            }
+            form.setSections(sections);
+        }
+
+        return forms;
     }
 
     private List<Field> getFormFields(Integer formId) {

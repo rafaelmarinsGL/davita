@@ -1,11 +1,8 @@
 package com.davita.questionnaire.controller;
 
 import com.davita.questionnaire.model.Form;
-import com.davita.questionnaire.model.Questionnaire;
 import com.davita.questionnaire.model.Submission;
 import com.davita.questionnaire.service.FormService;
-import com.davita.questionnaire.service.QuestionnaireService;
-import com.davita.questionnaire.service.SubmissionService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 @RestController
 @Api(value = "Form Endpoint", description = "CRUD operations for forms")
@@ -24,20 +19,15 @@ public class FormController {
     @Autowired
     FormService formService;
 
-    @Autowired
-    SubmissionService submissionService;
-
-    @Autowired
-    QuestionnaireService questionnaireService;
 
     @PostMapping("/form")
-    @ApiOperation(value = "Create a form")
+    @ApiOperation(value = "Create a form", response = Form.class)
     ResponseEntity<Form> postForm(@RequestBody Form form) {
         return ResponseEntity.ok(formService.save(form));
     }
 
     @GetMapping("/form/{id}")
-    @ApiOperation(value = "Get a form by id")
+    @ApiOperation(value = "Get a form by id", response = Form.class)
     ResponseEntity<Form> getForm(@PathVariable Integer id) {
         return formService.findById(id)
                 .map(ResponseEntity::ok)
@@ -56,7 +46,7 @@ public class FormController {
     }
 
     @PutMapping("/form/{id}")
-    @ApiOperation(value = "Update a form")
+    @ApiOperation(value = "Update a form", response = Form.class)
     ResponseEntity<Form> updateForm(@PathVariable Integer id, @RequestBody Form form) {
         System.out.println(form.toString());
         return formService.findById(id)
@@ -69,7 +59,7 @@ public class FormController {
     }
 
     @GetMapping("/form/{id}/submissions")
-    @ApiOperation(value = "Get a form submissions")
+    @ApiOperation(value = "Get a form submissions", response = Form.class, responseContainer = "List")
     ResponseEntity<List<Submission>> getFormSubmissions(@PathVariable Integer id) {
         return formService.findById(id)
                 .map(Form::getSubmissions)

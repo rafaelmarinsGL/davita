@@ -14,6 +14,6 @@ import java.util.List;
 public class FormSection {
 
     private String name;
-    private List<Field> fields;
+    public List<Field> fields;
 
 }

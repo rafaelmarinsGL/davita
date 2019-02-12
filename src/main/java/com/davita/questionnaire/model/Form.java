@@ -1,6 +1,8 @@
 package com.davita.questionnaire.model;
 
 import com.davita.questionnaire.util.JpaJsonConverter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -10,7 +12,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -18,6 +19,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonIgnoreProperties(ignoreUnknown = true)
 @ApiModel( value = "Form", description = "Form definition")
 public class Form {
     @Id
@@ -26,17 +28,20 @@ public class Form {
     private Integer id;
     @ApiModelProperty(notes = "Form name", dataType = "String")
     private String name;
+    @ApiModelProperty(notes = "Form description", dataType = "String")
+    private String description;
 
     @Column(columnDefinition = "text")
     @Convert(converter = JpaJsonConverter.class)
     @ApiModelProperty(notes = "Form sections", dataType = "ArrayList<FormSection>")
-    private ArrayList<FormSection> sections;
+    private List<FormSection> sections;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "form")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private List<Questionnaire> questionnaires;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "form")
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @JsonProperty(value = "test", access = JsonProperty.Access.WRITE_ONLY)
     private List<Submission> submissions;
+
 }
