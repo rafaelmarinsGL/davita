@@ -1,6 +1,7 @@
 package com.davita.questionnaire.model;
 
 import com.davita.questionnaire.util.JpaJsonConverter;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -10,6 +11,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -24,7 +26,17 @@ public class Form {
     private Integer id;
     @ApiModelProperty(notes = "Form name", dataType = "String")
     private String name;
+
     @Column(columnDefinition = "text")
     @Convert(converter = JpaJsonConverter.class)
+    @ApiModelProperty(notes = "Form sections", dataType = "ArrayList<FormSection>")
     private ArrayList<FormSection> sections;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "form")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private List<Questionnaire> questionnaires;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "form")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private List<Submission> submissions;
 }

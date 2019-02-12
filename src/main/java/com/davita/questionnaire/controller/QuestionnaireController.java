@@ -15,6 +15,7 @@ import javax.validation.Valid;
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 
 @RestController
 @Api(value = "Questionnaire Endpoint", description = "CRUD operations for questionnaires")
@@ -95,7 +96,7 @@ public class QuestionnaireController {
     @ApiOperation(value = "Get a questionnaire submissions")
     ResponseEntity<?> getQuestionnaireSubmissions(@PathVariable Integer id) {
         return questionnaireService.findById(id)
-                .map(q -> submissionService.findByQuestionnaire(q))
+                .map(Questionnaire::getSubmissions)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
@@ -125,7 +126,7 @@ public class QuestionnaireController {
         form.setSections(sections);
         form = formController.postForm(form).getBody();
 
-        postQuestionnaire(new Questionnaire(1, QuestionnaireStatus.PENDING, person, form));
+        postQuestionnaire(new Questionnaire(1, QuestionnaireStatus.PENDING, person, form, Collections.emptyList()));
 
     }
 }

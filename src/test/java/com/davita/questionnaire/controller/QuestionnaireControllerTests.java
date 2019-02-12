@@ -17,6 +17,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.Optional;
 
 import static org.mockito.Mockito.*;
@@ -36,7 +37,7 @@ public class QuestionnaireControllerTests {
 
     @Before
     public void initialize() {
-        questionnaire = new Questionnaire(QuestionnaireStatus.PENDING, new Person(), new Form());
+        questionnaire = new Questionnaire(QuestionnaireStatus.PENDING, new Person(),new Form(), Collections.emptyList());
         when(questionnaireServiceMock.findById(1)).thenReturn(Optional.empty());
         when(questionnaireServiceMock.findById(2)).thenReturn(Optional.of(questionnaire));
         doNothing().when(questionnaireServiceMock).deleteById(2);
