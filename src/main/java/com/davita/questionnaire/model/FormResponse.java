@@ -7,13 +7,11 @@ import lombok.Setter;
 
 import java.util.List;
 
-@Getter
-@Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class FormSection {
+@Getter
+@Setter
+public class FormResponse {
 
-    private String name;
-    private List<Field> fields;
-
+    List<Form> forms;
 }

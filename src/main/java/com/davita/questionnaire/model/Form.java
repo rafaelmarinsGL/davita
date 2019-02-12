@@ -10,6 +10,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -26,5 +27,5 @@ public class Form {
     private String name;
     @Column(columnDefinition = "text")
     @Convert(converter = JpaJsonConverter.class)
-    private ArrayList<FormSection> sections;
+    private List<FormSection> sections;
 }

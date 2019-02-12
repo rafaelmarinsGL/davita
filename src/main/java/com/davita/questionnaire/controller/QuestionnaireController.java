@@ -2,6 +2,7 @@ package com.davita.questionnaire.controller;
 
 import com.davita.questionnaire.enums.QuestionnaireStatus;
 import com.davita.questionnaire.model.*;
+import com.davita.questionnaire.service.FormStackService;
 import com.davita.questionnaire.service.QuestionnaireService;
 import com.davita.questionnaire.service.SubmissionService;
 import io.swagger.annotations.Api;
@@ -13,8 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 import javax.annotation.PostConstruct;
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.List;
 
 @RestController
 @Api(value = "Questionnaire Endpoint", description = "CRUD operations for questionnaires")
@@ -32,6 +32,9 @@ public class QuestionnaireController {
 
     @Autowired
     FormController formController;
+
+    @Autowired
+    FormStackService formStackService;
 
     @GetMapping("/questionnaire")
     @ApiOperation(value = "Get all the questionnaires", notes = "Returns a list of all the questionnaires", response = Questionnaire.class, responseContainer = "List")
@@ -103,29 +106,17 @@ public class QuestionnaireController {
     @PostConstruct
     private void init() {
 
+        List<Form> forms = formStackService.getUserForms();
+
         Person person = new Person();
         person.setFirstName("Rafael");
         person.setMiddleName("Marins");
         person.setLastName("Carinha");
-        person = personController.postPerson(person).getBody();
+        final Person newPerson = personController.postPerson(person).getBody();
 
-        Form form = new Form();
-        form.setName("Form # 1");
-        ArrayList<FormSection> sections = new ArrayList<>(
-                Arrays.asList(
-                        new FormSection("Section # 1", new ArrayList<Field>(
-                                Arrays.asList(
-                                        new Field(1, "first name", "Put your first name here", "shortText", true, ""),
-                                        new Field(2, "Address", "Put your address name here", "longText", true, "")))),
-                        new FormSection("Section # 2", new ArrayList<Field>(
-                                Arrays.asList(
-                                        new Field(3, "Do you have skype?", "Check here is you have a skype account", "checkbox", true, "true"),
-                                        new Field(4, "When is your Birthday?", "Put your Birthday here", "date", true, ""))))));
-
-        form.setSections(sections);
-        form = formController.postForm(form).getBody();
-
-        postQuestionnaire(new Questionnaire(1, QuestionnaireStatus.PENDING, person, form));
-
+        for(Form form : forms) {
+            Form newForm = formController.postForm(form).getBody();
+            postQuestionnaire(new Questionnaire(QuestionnaireStatus.PENDING, newPerson, newForm));
+        }
     }
 }
