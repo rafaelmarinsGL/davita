@@ -20,9 +20,6 @@ public class PersonController {
     @Autowired
     PersonService personService;
 
-    @Autowired
-    QuestionnaireService questionnaireService;
-
     @GetMapping("/person")
     @ApiOperation(value = "Get all the persons", notes = "Returns a list of all persons", response = Person.class, responseContainer = "List")
     ResponseEntity<?> getPersons() {
@@ -46,7 +43,7 @@ public class PersonController {
     @ApiOperation(value = "Returns a list of all pending questionnaires")
     ResponseEntity<List<Questionnaire>> getPersonQuestionnaires(@PathVariable Integer id) {
         return personService.findById(id)
-                .map(p -> questionnaireService.findByPerson(p))
+                .map(Person::getQuestionnaires)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }

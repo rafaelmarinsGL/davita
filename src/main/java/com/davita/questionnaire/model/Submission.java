@@ -1,6 +1,7 @@
 package com.davita.questionnaire.model;
 
 import com.davita.questionnaire.util.JpaJsonConverter;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -33,7 +34,14 @@ public class Submission {
     @ApiModelProperty(notes = "Form answers", dataType = "ArrayList<Answer>")
     private ArrayList<Answer> answers;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @ApiModelProperty(notes = "Questionnaire", dataType = "Questionnaire")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Questionnaire questionnaire;
+
+    @ManyToOne(fetch =  FetchType.LAZY)
+    @ApiModelProperty(notes = "Form", dataType = "Form")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private Form form;
 
 }

@@ -1,6 +1,7 @@
 package com.davita.questionnaire.controller;
 
 import com.davita.questionnaire.model.Form;
+import com.davita.questionnaire.model.Questionnaire;
 import com.davita.questionnaire.model.Submission;
 import com.davita.questionnaire.service.FormService;
 import com.davita.questionnaire.service.QuestionnaireService;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @Api(value = "Form Endpoint", description = "CRUD operations for forms")
@@ -68,10 +70,9 @@ public class FormController {
 
     @GetMapping("/form/{id}/submissions")
     @ApiOperation(value = "Get a form submissions")
-    ResponseEntity<List<Submission>> getQuestionnaireSubmissions(@PathVariable Integer id) {
+    ResponseEntity<List<Submission>> getFormSubmissions(@PathVariable Integer id) {
         return formService.findById(id)
-                .map(f -> questionnaireService.findAllByForm(f))
-                .flatMap(l -> Optional.of(submissionService.findAllByQuestionnaire(l)))
+                .map(Form::getSubmissions)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
