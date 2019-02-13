@@ -102,32 +102,4 @@ public class QuestionnaireController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @PostConstruct
-    private void init() {
-
-        Person person = new Person();
-        person.setFirstName("Rafael");
-        person.setMiddleName("Marins");
-        person.setLastName("Carinha");
-        person = personController.postPerson(person).getBody();
-
-        Form form = new Form();
-        form.setName("Form # 1");
-        ArrayList<FormSection> sections = new ArrayList<>(
-                Arrays.asList(
-                        new FormSection("Section # 1", new ArrayList<Field>(
-                                Arrays.asList(
-                                        new Field(1, "first name", "Put your first name here", "shortText", true, ""),
-                                        new Field(2, "Address", "Put your address name here", "longText", true, "")))),
-                        new FormSection("Section # 2", new ArrayList<Field>(
-                                Arrays.asList(
-                                        new Field(3, "Do you have skype?", "Check here is you have a skype account", "checkbox", true, "true"),
-                                        new Field(4, "When is your Birthday?", "Put your Birthday here", "date", true, ""))))));
-
-        form.setSections(sections);
-        form = formController.postForm(form).getBody();
-
-        postQuestionnaire(new Questionnaire(1, QuestionnaireStatus.PENDING, person, form, Collections.emptyList()));
-
-    }
 }
